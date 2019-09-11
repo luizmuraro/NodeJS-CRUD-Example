@@ -36,12 +36,33 @@ app.get('/show', (req, res) => {
 })
 
 app.post('/show', (req, res) => {
-    db.collection('data').save(req.body, (err, result) => {
-        if (err) return console.log(err)
+    var nome = req.body.name + " " + req.body.surname
 
-        console.log('Salvo no Banco de Dados')
+    db.collection('data').find().toArray((err, results) => {
+        console.log(JSON.stringify(results))
+        if (err) return console.log(err)
+       
+        var jaExiste = false
+
+        for(i = 0; i < results.length; i++) {
+            console.log(results[i].name)
+
+            if (results[i].name + " " + results[i].surname == nome) {
+                console.log("Usuário já cadastrado")
+                jaExiste = true
+            }
+        }
+        if (!jaExiste) {
+        db.collection('data').save(req.body, (err, result) => {
+            if (err) return console.log(err) 
+    
+            console.log('Salvo no Banco de Dados')
+        })
+    }
+            
         res.redirect('/show')
     })
+    
 })
 
 app.route('/edit/:id')
