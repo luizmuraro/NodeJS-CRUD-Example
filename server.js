@@ -20,20 +20,84 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.set('view engine', 'ejs')
 
+//ALUNOS
+
 app.get('/aluno', (req, res) => {
-    res.render('index.ejs')
+    res.render('aluno.ejs')
 })
 
 app.get('/aluno', (req, res) => {
-    var cursor = db.collection('ronaldo').find()
+    var cursor = db.collection('alunosLL').find()
 })
+
+app.post('/alunos', (req, res) => {
+    var nome = req.body.name
+    var matricula = req.body._id
+
+    db.collection('alunosLL').find().toArray((err, results) => {
+        console.log(JSON.stringify(results))
+      
+        db.collection('alunosLL').save(req.body, (err, result) => {
+            if (err) return console.log(err) 
+    
+            console.log('Salvo no Banco de Dados')
+        })
+            
+        res.redirect('/alunos')
+    })
+    
+})
+
+app.get('/alunos', (req, res) => {
+    db.collection('alunosLL').find().toArray((err, results) => {
+        if (err) return console.log(err)
+            res.render('showAluno.ejs', {data: results})
+    })
+})
+
+
+app.route('/aluno/edit/:id')
+.get((req, res) => {
+    var id = req.params.id
+
+    db.collection('alunosLL').find(ObjectId(id)).toArray((err, result) => {
+        if (err) return res.send(err)
+        res.render('editAluno.ejs', { data: result })
+    })
+})
+.post((req, res) => {
+    var id = req.params.id
+    var name = req.body.name
+
+    db.collection('alunosLL').updateOne({_id: ObjectId(id)}, {
+        $set: {
+            name: name,
+        }
+    }, (err, result) => {
+        if (err) return res.send(err)
+        res.redirect('/alunos')
+        console.log('Atualizado no Banco de Dados')
+    })
+})
+app.route('/aluno/delete/:id')
+.get((req, res) => {
+    var id = req.params.id
+
+    db.collection('alunosLL').deleteOne({_id: ObjectId(id)}, (err, result) => {
+        if (err) return res.send(500, err)
+        console.log('Deletando do Banco de Dados!')
+        res.redirect('/alunos')
+    })
+})
+
+// Disciplinass
 
 app.get('/disciplina', (req, res) => {
     res.render('disciplina.ejs')
 })
 
 app.get('/disciplina', (req, res) => {
-    var cursor = db.collection('romario').find()
+    var cursor = db.collection('disciplinasLL').find()
 })
 
 app.post('/disciplinas', (req, res) => {
@@ -41,10 +105,10 @@ app.post('/disciplinas', (req, res) => {
     var codigo = req.body.codigo
     var horarios = req.body.horarios
 
-    db.collection('romario').find().toArray((err, results) => {
+    db.collection('disciplinasLL').find().toArray((err, results) => {
         console.log(JSON.stringify(results))
       
-        db.collection('romario').save(req.body, (err, result) => {
+        db.collection('disciplinasLL').save(req.body, (err, result) => {
             if (err) return console.log(err) 
     
             console.log('Salvo no Banco de Dados')
@@ -56,36 +120,49 @@ app.post('/disciplinas', (req, res) => {
 })
 
 app.get('/disciplinas', (req, res) => {
-    db.collection('romario').find().toArray((err, results) => {
+    db.collection('disciplinasLL').find().toArray((err, results) => {
         if (err) return console.log(err)
             res.render('showDisciplina.ejs', {data: results})
     })
 })
 
-app.post('/alunos', (req, res) => {
-    var nome = req.body.name
-    var matricula = req.body._id
+app.route('/disciplina/edit/:id')
+.get((req, res) => {
+    var id = req.params.id
 
-    db.collection('ronaldo').find().toArray((err, results) => {
-        console.log(JSON.stringify(results))
-      
-        db.collection('ronaldo').save(req.body, (err, result) => {
-            if (err) return console.log(err) 
-    
-            console.log('Salvo no Banco de Dados')
-        })
-            
-        res.redirect('/show')
-    })
-    
-})
-
-app.get('/alunos', (req, res) => {
-    db.collection('ronaldo').find().toArray((err, results) => {
-        if (err) return console.log(err)
-            res.render('show.ejs', {data: results})
+    db.collection('disciplinasLL').find(ObjectId(id)).toArray((err, result) => {
+        if (err) return res.send(err)
+        res.render('editDisciplina.ejs', { data: result })
     })
 })
+.post((req, res) => {
+    var id = req.params.id
+    var name = req.body.name
+    var horarios = req.body.horarios
+
+    db.collection('disciplinasLL').updateOne({_id: ObjectId(id)}, {
+        $set: {
+            name: name,
+            horarios : horarios,
+        }
+    }, (err, result) => {
+        if (err) return res.send(err)
+        res.redirect('/disciplinas')
+        console.log('Atualizado no Banco de Dados')
+    })
+})
+app.route('/disciplina/delete/:id')
+.get((req, res) => {
+    var id = req.params.id
+
+    db.collection('disciplinasLL').deleteOne({_id: ObjectId(id)}, (err, result) => {
+        if (err) return res.send(500, err)
+        console.log('Deletando do Banco de Dados!')
+        res.redirect('/disciplinas')
+    })
+})
+
+
 
 // app.post('/show', (req, res) => {
 //     var nome = req.body.name + " " + req.body.surname
@@ -116,37 +193,3 @@ app.get('/alunos', (req, res) => {
 //     })
     
 // })
-
-app.route('/edit/:id')
-.get((req, res) => {
-    var id = req.params.id
-
-    db.collection('ronaldo').find(ObjectId(id)).toArray((err, result) => {
-        if (err) return res.send(err)
-        res.render('edit.ejs', { data: result })
-    })
-})
-.post((req, res) => {
-    var id = req.params.id
-    var name = req.body.name
-
-    db.collection('ronaldo').updateOne({_id: ObjectId(id)}, {
-        $set: {
-            name: name,
-        }
-    }, (err, result) => {
-        if (err) return res.send(err)
-        res.redirect('/show')
-        console.log('Atualizado no Banco de Dados')
-    })
-})
-app.route('/delete/:id')
-.get((req, res) => {
-    var id = req.params.id
-
-    db.collection('ronaldo').deleteOne({_id: ObjectId(id)}, (err, result) => {
-        if (err) return res.send(500, err)
-        console.log('Deletando do Banco de Dados!')
-        res.redirect('/show')
-    })
-})

@@ -10,24 +10,21 @@
         <table border="1">
             <thead>
                 <tr>
-                    <td>Código da disciplina</td>
+                    <td>Matricula</td>
                     <td>Nome</td>
-                    <td>Horarios</td>
                     <td>Ação</td>
                 </tr>
             </thead>
             <tbody>
             <% data.forEach(function(details) { %>
                 <tr>
-                    <td><%= details.codigo %></td>
+                    <td><%= details._id %></td>
                     <td><%= details.name %></td>
-                    <td><%= details.horarios %></td>
-
-                    <td><a href="/edit/<%= details._id %>">Editar</a> - <a href="/delete/<%= details._id %>">Deletar</a></td>
+                    <td><a href="aluno/edit/<%= details._id %>">Editar</a> - <a href="aluno/delete/<%= details._id %>">Deletar</a></td>
                 </tr>
                 <% }) %>
             </tbody>
         </table>
-        <button><a href="/">Novo</a></button>
+        <button><a href="/aluno">Novo</a></button>
 </body>
 </html>

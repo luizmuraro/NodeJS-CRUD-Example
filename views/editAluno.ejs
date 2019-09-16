@@ -5,14 +5,15 @@
     <title>My CRUD in NodeJS</title>
 </head>
 <body>
-    <h2>Editar Registro</h2>
+    <h2>Editar Aluno</h2>
     <% data.forEach(function(details) { %>
-        <form action="/edit/<%= details._id %>" method="POST">
+        <form action="/aluno/edit/<%= details._id %>" method="POST">
+            <label for="">Nome: </label>
             <input type="text" value="<%= details.name %>" name="name">
             <br />
             <button type="submit">Editar</button>
         </form>
     <% }) %>
-    <button><a href="/show">Todos</a></button>
+    <button><a href="/alunos">Todos</a></button>
 </body>
 </html>
