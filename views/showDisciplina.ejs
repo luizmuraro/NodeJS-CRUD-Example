@@ -10,9 +10,9 @@
         <table border="1">
             <thead>
                 <tr>
-                    <td>Código da disciplina</td>
+                    <td>Código da Disciplina</td>
                     <td>Nome</td>
-                    <td>Horarios</td>
+                    <td>Horários</td>
                     <td>Ação</td>
                 </tr>
             </thead>
@@ -22,12 +22,11 @@
                     <td><%= details.codigo %></td>
                     <td><%= details.name %></td>
                     <td><%= details.horarios %></td>
-
                     <td><a href="/edit/<%= details._id %>">Editar</a> - <a href="/delete/<%= details._id %>">Deletar</a></td>
                 </tr>
                 <% }) %>
             </tbody>
         </table>
-        <button><a href="/">Novo</a></button>
+        <button><a href="/disciplina">Novo</a></button>
 </body>
 </html>
