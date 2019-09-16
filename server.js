@@ -22,6 +22,7 @@ app.set('view engine', 'ejs')
 
 //ALUNOS
 
+
 app.get('/aluno', (req, res) => {
     res.render('aluno.ejs')
 })
@@ -90,6 +91,10 @@ app.route('/aluno/delete/:id')
     })
 })
 
+app.route('aluno/:id/disciplinas')
+.get((req, res) => {
+    var id = req.params.id
+})
 // Disciplinass
 
 app.get('/disciplina', (req, res) => {
