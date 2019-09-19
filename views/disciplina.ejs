@@ -3,15 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar disciplina</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="margin: 15px;"> 
     
     <h2>Registrar</h2>
     <form action="/disciplinas" method="POST">
-        <input type="text" placeholder="Código da disciplina" name="codigo">
-        <input type="text" placeholder="Nome" name="name">
-        <input type="text" placeholder="Horários" name="horarios">
-        <button type="submit">Submit</button>
+        <div class="form-group">
+            <label for="name">Código da disciplina:</label>
+            <input type="text" class="form-control" id="codigo" name="codigo">
+        </div>
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="name">Horários:</label>
+            <input type="text" class="form-control" id="name" name="horarios">
+        </div>
+
+        <button class="btn btn-success" type="submit">Submit</button>
     </form>
     
 </body>

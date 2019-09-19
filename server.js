@@ -37,7 +37,7 @@ app.get('/aluno', (req, res) => {
 
 app.post('/alunos', (req, res) => {
     var nome = req.body.name
-    var matricula = req.body._id
+    var matricula = req.body.numMatricula
 
     db.collection('alunosLL').find().toArray((err, results) => {
         console.log(JSON.stringify(results))

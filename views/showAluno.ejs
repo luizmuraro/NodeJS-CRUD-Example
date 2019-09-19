@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
     
-    <h2>Registros</h2>
-        <table border="1">
+    <h2 style="margin: 20px;">Alunos matriculados</h2>
+        <table border="1" class="table table-striped table-dark"> 
             <thead>
                 <tr>
-                    <td>Matricula</td>
-                    <td>Nome</td>
-                    <td>Ação</td>
+                    <td scope="col">Matricula</td>
+                    <td scope="col">Nome</td>
+                    <td scope="col">Ação</td>
                 </tr>
             </thead>
             <tbody>
             <% data.forEach(function(details) { %>
                 <tr>
-                    <td><%= details._id %></td>
+                    <td><%= details.numMatricula %></td>
                     <td><%= details.name %></td>
-                    <td><a href="aluno/edit/<%= details._id %>">Editar</a> - <a href="aluno/delete/<%= details._id %>">Deletar</a> - <a href="aluno/<%= details._id %>/disciplinas"> Disciplinas</a></td>
+                    <td><button type="button" class="btn btn-primary" onclick="window.location.href='aluno/edit/<%= details._id %>'">Editar</button>  <button style="margin-left: 10px;" type="button" class="btn btn-danger" onclick="window.location.href='aluno/delete/<%= details._id %>'">Deletar</button>  
+                    
+                    <!-- <td><a href="aluno/edit/<%= details._id %>">Editar</a> - <a href="aluno/delete/<%= details._id %>">Deletar</a> - <a href="aluno/<%= details._id %>/disciplinas"> Disciplinas</a></td> -->
                 </tr>
                 <% }) %>
             </tbody>
         </table>
-        <button><a href="/aluno">Novo</a></button>
+        <button class="btn btn-dark" onclick="window.location.href='/aluno'">Novo</button>
 </body>
 </html>
