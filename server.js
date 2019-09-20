@@ -171,6 +171,73 @@ app.route('/disciplina/delete/:id')
     })
 })
 
+// Matriculas
+
+app.get('/matricula', (req, res) => {
+    res.render('matricula.ejs')
+})
+
+app.get('/matricula', (req, res) => {
+    var cursor = db.collection('matriculasLL').find()
+})
+
+
+app.post('/matriculas', (req, res) => {
+    var matricula = req.body.numMatricula
+    var codigo = req.body.codigo
+
+    db.collection('disciplinasLL').find().toArray((err, results) => {
+        for (let i = 0; i < results.length; i++) {
+            if (results[i].codigo == codigo) {
+
+                db.collection('alunosLL').find().toArray((err, result) => {
+                    for (let j = 0; j < result.length; j++) {
+                        
+                    if (result[j].numMatricula == matricula) {
+                        db.collection('matriculasLL').save(req.body, (err, results) => {
+                            console.log('Disciplina cadastrada')
+                        })
+                    } else {console.log('Aluno não encontrado')}
+                }
+            })
+            } else {
+                console.log('Disciplina não encontrada')
+            }
+            
+        }
+    })
+
+    res.redirect('/matricula')
+
+    
+})
+
+app.route('/matriculas/:id')
+.get((req, res) => {
+    var id = req.params.id
+    var matriculas = []
+    db.collection('alunosLL').find(ObjectId(id)).toArray((err, result) => {
+        if (err) return res.send(err)
+        db.collection('matriculasLL').find().toArray((err, results) => {
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].numMatricula == result[0].numMatricula) {
+                    console.log(results[i])
+                    matriculas.push(results[i])
+                    console.log("depois aqui")
+                    console.log(matriculas)
+                }
+            }
+            res.render('showAlunoDisciplina.ejs', {data: matriculas})
+
+        })
+        // res.render('editDisciplina.ejs', { data: result })
+  
+
+    })
+})
+
+
+
 
 
 // app.post('/show', (req, res) => {

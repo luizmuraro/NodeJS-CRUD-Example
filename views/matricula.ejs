@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar aluno</title>
+    <title>Matricular Aluno</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body style="margin: 20px;">
     
     <h2>Registro de Aluno</h2>
-    <form action="/alunos" method="POST">
+    <form action="/matriculas" method="POST">
+      
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <label for="name">Número de Matrícula:</label>
+            <input type="number" class="form-control" id="numMatricula" name="numMatricula">
         </div>
         <div class="form-group">
-            <label for="numMatricula">Número de Matrícula:</label>
-            <input type="number" class="form-control" id="numMatricula" name="numMatricula">
+            <label for="name">Código da Disciplina:</label>
+            <input type="text" class="form-control" id="codigo" name="codigo">
         </div>
     
         <button class="btn btn-success" type="submit">Submit</button>
