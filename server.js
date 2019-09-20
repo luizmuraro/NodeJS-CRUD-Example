@@ -113,17 +113,28 @@ app.post('/disciplinas', (req, res) => {
     var nome = req.body.name
     var codigo = req.body.codigo
     var horarios = req.body.horarios
+    var disponivel = true
 
     db.collection('disciplinasLL').find().toArray((err, results) => {
-        console.log(JSON.stringify(results))
-      
+        // console.log(JSON.stringify(results))
+        for (let i = 0; i < results.length; i++) {
+            if(results[i].codigo == codigo) {
+                disponivel = false
+            }
+        }
+        
+        if (disponivel) {
         db.collection('disciplinasLL').save(req.body, (err, result) => {
-            if (err) return console.log(err) 
-    
+            if (err) return console.log(err)
             console.log('Salvo no Banco de Dados')
+            res.redirect('/disciplinas')
+        
         })
-            
-        res.redirect('/disciplinas')
+    } else {
+        console.log("Disciplina com esse código já cadastrada")
+        res.redirect('/disciplina')
+    } 
+        
     })
     
 })
