@@ -41,7 +41,7 @@ app.post('/alunos', (req, res) => {
 
     db.collection('alunosLL').find().toArray((err, results) => {
         console.log(JSON.stringify(results))
-      
+        
         db.collection('alunosLL').save(req.body, (err, result) => {
             if (err) return console.log(err) 
     
@@ -207,6 +207,7 @@ app.post('/matriculas', (req, res) => {
                     if (result[j].numMatricula == matricula) {
                         db.collection('matriculasLL').save(req.body, (err, results) => {
                             console.log('Disciplina cadastrada')
+                            res.redirect('/alunos')
                         })
                     } else {console.log('Aluno não encontrado')}
                 }
@@ -218,7 +219,6 @@ app.post('/matriculas', (req, res) => {
         }
     })
 
-    res.redirect('/matricula')
 
     
 })
@@ -246,7 +246,16 @@ app.route('/matriculas/:id')
 
     })
 })
+app.route('/delete/:id')
+.get((req, res) => {
+    var id = req.params.id
 
+    db.collection('matriculasLL').deleteOne({_id: ObjectId(id)}, (err, result) => {
+        if (err) return res.send(500, err)
+        console.log('Deletando do Banco de Dados!')
+        res.redirect('/alunos')
+    })
+})
 
 
 
