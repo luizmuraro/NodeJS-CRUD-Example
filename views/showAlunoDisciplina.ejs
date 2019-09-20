@@ -14,6 +14,8 @@
                 <tr>
                     <td scope="col">Matricula</td>
                     <td scope="col">Disciplina</td>
+                    <td scope="col">Ação</td>
+
                 </tr>
             </thead>
             <tbody>
@@ -21,13 +23,13 @@
                 <tr>
                     <td><%= details.numMatricula %></td>
                     <td><%= details.codigo %></td>
-                  
+                    <td><button style="margin-left: 10px;" type="button" class="btn btn-danger" onclick="window.location.href='/delete/<%= details._id %>'">Cancelar Matrícula</button></td>
                     
                 </tr>
                 <% }) %>
             </tbody>
         </table>
         <button class="btn btn-dark" onclick="window.location.href='/alunos'">Voltar</button>
-        
+
 </body>
 </html>
