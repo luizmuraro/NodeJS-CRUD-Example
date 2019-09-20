@@ -38,19 +38,28 @@ app.get('/aluno', (req, res) => {
 app.post('/alunos', (req, res) => {
     var nome = req.body.name
     var matricula = req.body.numMatricula
+    var disponivel = true
 
     db.collection('alunosLL').find().toArray((err, results) => {
         console.log(JSON.stringify(results))
+
+        for(i = 0; i < results.length; i++) {
+            if (results[i].numMatricula == matricula) {
+                disponivel = false
+            }
+        }
         
+        if(disponivel) {
         db.collection('alunosLL').save(req.body, (err, result) => {
             if (err) return console.log(err) 
-    
             console.log('Salvo no Banco de Dados')
+            res.redirect('/alunos')
         })
-            
-        res.redirect('/alunos')
+        } else {
+            console.log('Aluno já cadastrado');
+            res.redirect('/aluno')
+        }
     })
-    
 })
 
 app.get('/alunos', (req, res) => {
