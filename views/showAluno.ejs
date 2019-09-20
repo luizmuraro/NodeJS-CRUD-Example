@@ -24,11 +24,10 @@
                     <td><%= details.name %></td>
                     <td><button type="button" class="btn btn-primary" onclick="window.location.href='aluno/edit/<%= details._id %>'">Editar</button>  <button style="margin-left: 10px;" type="button" class="btn btn-danger" onclick="window.location.href='aluno/delete/<%= details._id %>'">Deletar</button>  
                     
-                    <!-- <td><a href="aluno/edit/<%= details._id %>">Editar</a> - <a href="aluno/delete/<%= details._id %>">Deletar</a> - <a href="aluno/<%= details._id %>/disciplinas"> Disciplinas</a></td> -->
                 </tr>
                 <% }) %>
             </tbody>
         </table>
-        <button class="btn btn-dark" onclick="window.location.href='/aluno'">Novo</button>
+        <button class="btn btn-dark" onclick="window.location.href='/aluno'">Novo Aluno</button>
 </body>
 </html>
