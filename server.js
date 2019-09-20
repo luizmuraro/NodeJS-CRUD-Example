@@ -209,13 +209,10 @@ app.post('/matriculas', (req, res) => {
                             console.log('Disciplina cadastrada')
                             res.redirect('/alunos')
                         })
-                    } else {console.log('Aluno não encontrado')}
+                    } 
                 }
             })
-            } else {
-                console.log('Disciplina não encontrada')
             }
-            
         }
     })
 
@@ -257,35 +254,3 @@ app.route('/delete/:id')
     })
 })
 
-
-
-
-// app.post('/show', (req, res) => {
-//     var nome = req.body.name + " " + req.body.surname
-
-//     db.collection('data').find().toArray((err, results) => {
-//         console.log(JSON.stringify(results))
-//         if (err) return console.log(err)
-       
-//         var jaExiste = false
-
-//         for(i = 0; i < results.length; i++) {
-//             console.log(results[i].name)
-
-//             if (results[i].name + " " + results[i].surname == nome) {
-//                 console.log("Usuário já cadastrado")
-//                 jaExiste = true
-//             }
-//         }
-//         if (!jaExiste) {
-//         db.collection('data').save(req.body, (err, result) => {
-//             if (err) return console.log(err) 
-    
-//             console.log('Salvo no Banco de Dados')
-//         })
-//     }
-            
-//         res.redirect('/show')
-//     })
-    
-// })
